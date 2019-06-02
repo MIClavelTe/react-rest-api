@@ -24,11 +24,22 @@ class Main extends React.Component {
         this.fch()
     }
 
+    handleUserDelete = id => {
+        this.setState( state => (
+            { users: state.users.filter( (value, index) => index !== id ) }
+        ))
+    }
+
     render () {
         return (
             <>
-                {this.state.users.map(user => 
-                    <Card user={user} key={user.id}/>
+                {this.state.users.map((user,index) => 
+                    <Card 
+                        user={user} 
+                        key={user.id} 
+                        onUserDelete={this.handleUserDelete} 
+                        cardIndex={index}
+                    />
                 )}
                 <button onClick={this.handleClick}>Fetch</button>
             </>
